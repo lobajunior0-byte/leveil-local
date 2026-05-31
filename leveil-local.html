@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L'Éveil Local — Reliure Artisanale</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bordeaux:  #7B1F2E;
+      --bordeaux-light: #9E3347;
+      --bordeaux-pale: #F5EAEC;
+      --cream: #FAF8F4;
+      --warm-white: #FFFFFF;
+      --ink: #1E1A18;
+      --text: #3D3530;
+      --muted: #8A7F79;
+      --border: #E5DDD8;
+      --gold: #B8965A;
+      --gold-light: #D4AF70;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(250,248,244,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 68px;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+    .nav-brand-icon {
+      width: 36px; height: 36px; background: var(--bordeaux);
+      display: flex; align-items: center; justify-content: center; color: #fff;
+    }
+    .nav-brand-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.1; }
+    .nav-brand-name span { color: var(--bordeaux); }
+    .nav-brand-sub { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--text); text-decoration: none; opacity: 0.6; transition: opacity 0.2s, color 0.2s; }
+    .nav-links a:hover { opacity: 1; color: var(--bordeaux); }
+    .nav-cta { background: var(--bordeaux); color: #fff !important; opacity: 1 !important; padding: 0.5rem 1.1rem; transition: background 0.2s !important; }
+    .nav-cta:hover { background: var(--bordeaux-light) !important; }
+
+    /* HERO */
+    #accueil { min-height: 100vh; padding-top: 68px; display: grid; grid-template-columns: 55% 45%; }
+    .hero-left { padding: 5.5rem 5vw 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--bordeaux-pale); color: var(--bordeaux);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.4rem 0.9rem; margin-bottom: 1.8rem; width: fit-content;
+    }
+    .hero-badge::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--bordeaux); }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem,4.5vw,4rem); font-weight: 700; line-height: 1.12; color: var(--ink); margin-bottom: 0.9rem; }
+    h1 em { font-style: italic; color: var(--bordeaux); }
+    .hero-slogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--gold); margin-bottom: 1.4rem; letter-spacing: 0.02em; }
+    .hero-desc { font-size: 0.96rem; color: var(--muted); max-width: 450px; line-height: 1.85; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--bordeaux); color: #fff; padding: 0.85rem 1.8rem; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, gap 0.2s; }
+    .btn-primary:hover { background: var(--bordeaux-light); gap: 0.9rem; }
+    .btn-outline { display: inline-flex; align-items: center; gap: 0.6rem; border: 1.5px solid var(--bordeaux); color: var(--bordeaux); padding: 0.85rem 1.8rem; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, color 0.25s; }
+    .btn-outline:hover { background: var(--bordeaux); color: #fff; }
+    .hero-right { position: relative; overflow: hidden; background: var(--ink); }
+    .hero-photo { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(123,31,46,0.55) 0%, transparent 65%); }
+    .hero-caption { position: absolute; bottom: 2.5rem; left: 2.5rem; }
+    .hero-caption-big { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: rgba(255,255,255,0.1); line-height: 1; }
+    .hero-caption-text { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+
+    /* SECTIONS */
+    section { padding: 6rem 5vw; }
+    .section-label { display: flex; align-items: center; gap: 0.75rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bordeaux); margin-bottom: 1.1rem; }
+    .section-label::before { content:''; display:block; width:28px; height:2px; background:var(--bordeaux); }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,3.5vw,2.9rem); font-weight: 700; color: var(--ink); line-height: 1.2; }
+    h2 em { font-style: italic; color: var(--bordeaux); }
+
+    /* À PROPOS */
+    #a-propos { background: var(--warm-white); border-top: 1px solid var(--border); }
+    .apropos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+    .apropos-text p { color: var(--text); line-height: 1.9; margin-bottom: 1.1rem; font-size: 0.96rem; }
+    .apropos-highlight { border-left: 3px solid var(--bordeaux); padding: 1rem 1.5rem; background: var(--bordeaux-pale); margin: 1.5rem 0; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.02rem; color: var(--bordeaux); line-height: 1.6; }
+    .apropos-side { display: flex; flex-direction: column; gap: 1.4rem; }
+    .info-card { border: 1px solid var(--border); padding: 1.6rem; background: var(--cream); }
+    .info-card-title { font-family: 'Playfair Display', serif; font-size: 0.97rem; font-weight: 700; color: var(--ink); margin-bottom: 0.7rem; display: flex; align-items: center; gap: 0.5rem; }
+    .info-card-title svg { color: var(--bordeaux); flex-shrink: 0; }
+    .info-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.8; }
+    .valeurs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; }
+    .valeur-item { border-top: 2px solid var(--bordeaux); padding-top: 0.65rem; }
+    .valeur-name { font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--bordeaux); margin-bottom: 0.35rem; }
+    .valeur-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+    /* PRODUITS */
+    #produits { background: var(--cream); border-top: 1px solid var(--border); }
+    .produits-intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3rem; }
+    .produits-intro p { font-size: 0.94rem; color: var(--muted); line-height: 1.85; margin-top: 1rem; }
+    .commande-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bordeaux); color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1.2rem; margin-top: 1rem; }
+    .produits-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); }
+    .produit-card { background: var(--warm-white); padding: 2.25rem 1.75rem; display: flex; flex-direction: column; transition: background 0.3s; }
+    .produit-card:hover { background: var(--bordeaux-pale); }
+    .produit-icon { width: 50px; height: 50px; border: 1.5px solid var(--bordeaux); display: flex; align-items: center; justify-content: center; color: var(--bordeaux); margin-bottom: 1.4rem; transition: background 0.3s, color 0.3s; }
+    .produit-card:hover .produit-icon { background: var(--bordeaux); color: #fff; }
+    .produit-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.55rem; }
+    .produit-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.75; flex: 1; }
+    .produit-tag { margin-top: 1.4rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bordeaux); display: flex; align-items: center; gap: 0.4rem; }
+    .produit-tag::before { content:''; display:block; width:14px; height:1px; background:var(--bordeaux); }
+
+    /* SERVICES */
+    #services { background: var(--warm-white); border-top: 1px solid var(--border); }
+    .services-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3rem; }
+    .services-intro-grid p { font-size: 0.94rem; color: var(--muted); line-height: 1.85; margin-top: 1rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .service-card { border: 1px solid var(--border); padding: 2.1rem; position: relative; overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s; }
+    .service-card:hover { border-color: var(--bordeaux); box-shadow: 0 8px 30px rgba(123,31,46,0.08); }
+    .service-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:0; background:var(--bordeaux); transition: height 0.35s; }
+    .service-card:hover::before { height: 100%; }
+    .service-icon { width: 44px; height: 44px; background: var(--bordeaux-pale); display: flex; align-items: center; justify-content: center; color: var(--bordeaux); margin-bottom: 1.2rem; }
+    .service-name { font-family: 'Playfair Display', serif; font-size: 1.08rem; font-weight: 700; color: var(--ink); margin-bottom: 0.7rem; }
+    .service-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+
+    /* CONTACT */
+    #contact { background: var(--cream); border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; margin-top: 3rem; align-items: start; }
+    .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: 1.4rem; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .contact-item-icon { width: 40px; height: 40px; flex-shrink: 0; background: var(--bordeaux); display: flex; align-items: center; justify-content: center; color: #fff; }
+    .contact-item-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem; }
+    .contact-item-value { font-size: 0.93rem; color: var(--text); }
+    .contact-item-value a { color: var(--bordeaux); text-decoration: none; }
+    .contact-item-value a:hover { text-decoration: underline; }
+    .contact-note { margin-top: 2rem; padding: 1.1rem 1.25rem; background: var(--bordeaux-pale); border-left: 3px solid var(--bordeaux); font-size: 0.85rem; color: var(--bordeaux); line-height: 1.7; }
+    .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-group label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .form-group input, .form-group textarea, .form-group select { background: var(--warm-white); border: 1.5px solid var(--border); padding: 0.72rem 1rem; font-family: 'Lato', sans-serif; font-size: 0.91rem; color: var(--text); outline: none; transition: border-color 0.2s; width: 100%; resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--bordeaux); }
+    .form-group textarea { min-height: 110px; }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 3rem 5vw; }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 1.75rem; }
+    .footer-brand-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 0.25rem; }
+    .footer-brand-name span { color: var(--gold-light); }
+    .footer-slogan { font-style: italic; font-size: 0.82rem; color: var(--gold-light); margin-bottom: 0.9rem; }
+    .footer-brand p { font-size: 0.82rem; line-height: 1.75; max-width: 270px; }
+    .footer-col-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; margin-bottom: 1rem; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-links a { font-size: 0.84rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-light); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; }
+    .footer-porter strong { color: rgba(255,255,255,0.65); }
+
+    /* ANIMATIONS */
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      #accueil { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 5rem 1.5rem 3rem; }
+      .hero-right { height: 300px; }
+      section { padding: 4rem 1.5rem; }
+      .apropos-grid, .produits-intro, .services-intro-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .produits-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+      .valeurs-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .produits-grid { grid-template-columns: 1fr; }
+      .hero-btns { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#accueil" class="nav-brand">
+    <div class="nav-brand-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nav-brand-name">L'Éveil <span>Local</span></div>
+      <div class="nav-brand-sub">Reliure Artisanale</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#a-propos">À propos</a></li>
+    <li><a href="#produits">Produits</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact" class="nav-cta">Commander</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-left">
+    <div class="hero-badge fade-up">Start-up artisanale · Reliure locale</div>
+    <h1 class="fade-up" style="transition-delay:.1s">L'art de la<br><em>reliure artisanale,</em><br>au service de tous.</h1>
+    <div class="hero-slogan fade-up" style="transition-delay:.18s">« La qualité locale au service du besoin »</div>
+    <p class="hero-desc fade-up" style="transition-delay:.22s">Registres, cahiers de textes, facturiers, blocs-notes — conçus à la main avec des techniques artisanales traditionnelles. Disponibles sur commande, partout.</p>
+    <div class="hero-btns fade-up" style="transition-delay:.3s">
+      <a href="#produits" class="btn-primary">Voir nos produits <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
+      <a href="#contact" class="btn-outline">Passer commande</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="/mnt/user-data/uploads/IMG_7883.jpeg" alt="Registres reliés artisanaux L'Éveil Local" class="hero-photo" />
+    <div class="hero-overlay"></div>
+    <div class="hero-caption">
+      <div class="hero-caption-big">RELIURE</div>
+      <div class="hero-caption-text">Fabrication artisanale locale</div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="a-propos">
+  <div class="section-label fade-up">Notre histoire</div>
+  <h2 class="fade-up" style="transition-delay:.1s">Une start-up née pour <em>l'éveil</em> du savoir-faire local.</h2>
+  <div class="apropos-grid">
+    <div class="apropos-text fade-up" style="transition-delay:.15s">
+      <div class="apropos-highlight">« L'Éveil Local est une start-up nouvellement créée dans le but de promouvoir l'expertise locale dans l'art de la reliure artisanale locale. »</div>
+      <p>Notre mission est de conserver les techniques de fabrication artisanales et de les transmettre à travers notre savoir-faire. Ce savoir-faire nous permet de créer plus d'opportunités, caractérisé par une <strong>qualité exceptionnelle</strong> et une <strong>rigueur à la finition</strong>.</p>
+      <p>Nous pensons au développement de l'économie locale. Notre expertise locale doit devenir une barrière aux produits de substitution auxquels nous faisons face. Nous espérons couvrir le marché local avec des produits locaux, satisfaisants en qualité et en quantité.</p>
+      <p><strong>Pourquoi « L'Éveil » ?</strong> De façon littérale, l'éveil traduit une prise de conscience de la vie quotidienne, une responsabilité citoyenne, une envie de faire mieux et de progresser, une volonté d'être au sommet et l'envie de transmettre.</p>
+    </div>
+    <div class="apropos-side">
+      <div class="info-card fade-up" style="transition-delay:.2s">
+        <div class="info-card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Porté par
+        </div>
+        <p><strong>M. Loba Mpone Bernard Junior</strong><br/>Fondateur & Artisan relieur<br/>Promoteur du savoir-faire artisanal local.</p>
+      </div>
+      <div class="info-card fade-up" style="transition-delay:.25s">
+        <div class="info-card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Nos valeurs
+        </div>
+        <div class="valeurs-grid">
+          <div class="valeur-item">
+            <div class="valeur-name">Rigueur</div>
+            <div class="valeur-desc">La volonté de faire mieux et de ne jamais flancher sur la qualité.</div>
+          </div>
+          <div class="valeur-item">
+            <div class="valeur-name">Vision d'avenir</div>
+            <div class="valeur-desc">Développer l'économie locale par notre savoir-faire qui devient une référence.</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-card fade-up" style="transition-delay:.3s">
+        <div class="info-card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Disponibilité
+        </div>
+        <p>Tous nos produits et services sont disponibles <strong>sur commande</strong>. Nous livrons et offrons nos services <strong>partout</strong> selon vos besoins.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUITS -->
+<section id="produits">
+  <div class="produits-intro">
+    <div>
+      <div class="section-label fade-up">Nos produits</div>
+      <h2 class="fade-up" style="transition-delay:.1s">Des articles reliés à la <em>main,</em> sur commande.</h2>
+      <p class="fade-up" style="transition-delay:.15s">Chaque article est conçu avec soin selon les techniques artisanales locales. Qualité exceptionnelle, finition soignée — disponibles à l'unité ou en série pour particuliers, entreprises et institutions.</p>
+    </div>
+    <div class="fade-up" style="transition-delay:.2s">
+      <div class="commande-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Tous les produits sont sur commande
+      </div>
+    </div>
+  </div>
+  <div class="produits-grid">
+    <div class="produit-card fade-up">
+      <div class="produit-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <div class="produit-name">Registres</div>
+      <p class="produit-desc">Registres administratifs, comptables ou personnalisés. Reliure solide, couverture rigide, pages cousues pour une durabilité maximale.</p>
+      <div class="produit-tag">Sur commande</div>
+    </div>
+    <div class="produit-card fade-up" style="transition-delay:.08s">
+      <div class="produit-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+      </div>
+      <div class="produit-name">Cahiers de textes</div>
+      <p class="produit-desc">Cahiers de textes scolaires ou professionnels, formats standards ou sur mesure. Couverture personnalisable selon votre besoin.</p>
+      <div class="produit-tag">Sur commande</div>
+    </div>
+    <div class="produit-card fade-up" style="transition-delay:.16s">
+      <div class="produit-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="11" y2="17"/></svg>
+      </div>
+      <div class="produit-name">Facturiers</div>
+      <p class="produit-desc">Carnets à souches, duplicata et triplicata pour commerçants, artisans et entreprises. Numérotation et en-tête personnalisables.</p>
+      <div class="produit-tag">Sur commande</div>
+    </div>
+    <div class="produit-card fade-up" style="transition-delay:.24s">
+      <div class="produit-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div class="produit-name">Blocs-notes</div>
+      <p class="produit-desc">Blocs-notes de bureau, institutionnels ou publicitaires. Finition artisanale, collage et couverture de qualité, format au choix.</p>
+      <div class="produit-tag">Sur commande</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-intro-grid">
+    <div>
+      <div class="section-label fade-up">Nos services</div>
+      <h2 class="fade-up" style="transition-delay:.1s">Du façonnage à <em>l'entretien,</em> nous faisons tout.</h2>
+    </div>
+    <p class="fade-up" style="transition-delay:.15s">Nos artisans prennent en charge l'ensemble du cycle de vie de vos documents reliés — de la création initiale à la restauration des ouvrages anciens et précieux.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
+      <div class="service-name">Façonnage</div>
+      <p class="service-desc">Fabrication complète de vos articles reliés — découpe, pliage, assemblage et reliure selon les techniques artisanales traditionnelles. Travail sur mesure, précis et solide.</p>
+    </div>
+    <div class="service-card fade-up" style="transition-delay:.1s">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      </div>
+      <div class="service-name">Finitions</div>
+      <p class="service-desc">Soins apportés à chaque détail — rognage des tranches, dorure, estampage, couverture toilée ou cartonnée. La perfection jusqu'au dernier millimètre.</p>
+    </div>
+    <div class="service-card fade-up" style="transition-delay:.2s">
+      <div class="service-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="service-name">Entretien & Restauration</div>
+      <p class="service-desc">Entretien et restauration de vieux documents, archives, livres anciens. Nous intervenons selon le besoin pour préserver vos ouvrages et leur redonner vie.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label fade-up">Nous contacter</div>
+  <h2 class="fade-up" style="transition-delay:.1s">Passez votre <em>commande</em> ou posez vos questions.</h2>
+  <div class="contact-grid">
+    <div class="contact-info fade-up" style="transition-delay:.15s">
+      <h3>Coordonnées</h3>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.12 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Téléphone / WhatsApp</div>
+            <div class="contact-item-value"><a href="https://wa.me/237698039936">698 03 99 36</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">E-mail</div>
+            <div class="contact-item-value"><a href="mailto:lobajunior0@gmail.com">lobajunior0@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Disponibilité</div>
+            <div class="contact-item-value">Sur commande — partout</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-note">📦 Nous traitons toutes les commandes, grandes ou petites, pour particuliers, entreprises, écoles et institutions. Délais communiqués à la commande.</div>
+    </div>
+    <div class="contact-form fade-up" style="transition-delay:.2s">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nom complet</label>
+          <input type="text" placeholder="Votre nom" />
+        </div>
+        <div class="form-group">
+          <label>Téléphone / WhatsApp</label>
+          <input type="tel" placeholder="6XX XX XX XX" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Adresse e-mail</label>
+        <input type="email" placeholder="votre@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Type de commande</label>
+        <select>
+          <option value="">— Sélectionnez un produit ou service —</option>
+          <option>Registres</option>
+          <option>Cahiers de textes</option>
+          <option>Facturiers</option>
+          <option>Blocs-notes</option>
+          <option>Façonnage</option>
+          <option>Finitions</option>
+          <option>Entretien / Restauration</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Détails de votre commande</label>
+        <textarea placeholder="Décrivez votre besoin : quantité, format, personnalisation souhaitée…"></textarea>
+      </div>
+      <a href="mailto:lobajunior0@gmail.com" class="btn-primary" style="align-self:flex-start">
+        Envoyer la demande
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-brand-name">L'Éveil <span>Local</span></div>
+      <div class="footer-slogan">« La qualité locale au service du besoin »</div>
+      <p>Start-up artisanale spécialisée dans la reliure artisanale locale. Portée par M. Loba Mpone Bernard Junior, avec la conviction que le savoir-faire local est une richesse à préserver et à transmettre.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#a-propos">À propos</a></li>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/237698039936">WhatsApp : 698 03 99 36</a></li>
+        <li><a href="mailto:lobajunior0@gmail.com">lobajunior0@gmail.com</a></li>
+        <li><a href="#produits">Commandes sur demande</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 L'Éveil Local — Tous droits réservés</span>
+    <span class="footer-porter">Porté par <strong>M. Loba Mpone Bernard Junior</strong></span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
