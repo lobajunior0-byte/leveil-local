@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bordeaux:  #7B1F2E;
+      --bordeaux: #7B1F2E;
       --bordeaux-light: #9E3347;
       --bordeaux-pale: #F5EAEC;
       --cream: #FAF8F4;
@@ -21,28 +21,18 @@
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Lato', sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+    body { font-family: 'Lato', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
 
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(250,248,244,0.96);
-      backdrop-filter: blur(10px);
+      background: rgba(250,248,244,0.96); backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 5vw; height: 68px;
     }
     .nav-brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
-    .nav-brand-icon {
-      width: 36px; height: 36px; background: var(--bordeaux);
-      display: flex; align-items: center; justify-content: center; color: #fff;
-    }
+    .nav-brand-icon { width: 36px; height: 36px; background: var(--bordeaux); display: flex; align-items: center; justify-content: center; color: #fff; }
     .nav-brand-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); line-height: 1.1; }
     .nav-brand-name span { color: var(--bordeaux); }
     .nav-brand-sub { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
@@ -55,16 +45,11 @@
     /* HERO */
     #accueil { min-height: 100vh; padding-top: 68px; display: grid; grid-template-columns: 55% 45%; }
     .hero-left { padding: 5.5rem 5vw 4rem; display: flex; flex-direction: column; justify-content: center; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--bordeaux-pale); color: var(--bordeaux);
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 0.4rem 0.9rem; margin-bottom: 1.8rem; width: fit-content;
-    }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bordeaux-pale); color: var(--bordeaux); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.4rem 0.9rem; margin-bottom: 1.8rem; width: fit-content; }
     .hero-badge::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--bordeaux); }
     h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem,4.5vw,4rem); font-weight: 700; line-height: 1.12; color: var(--ink); margin-bottom: 0.9rem; }
     h1 em { font-style: italic; color: var(--bordeaux); }
-    .hero-slogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--gold); margin-bottom: 1.4rem; letter-spacing: 0.02em; }
+    .hero-slogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--gold); margin-bottom: 1.4rem; }
     .hero-desc { font-size: 0.96rem; color: var(--muted); max-width: 450px; line-height: 1.85; margin-bottom: 2.5rem; }
     .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--bordeaux); color: #fff; padding: 0.85rem 1.8rem; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: background 0.25s, gap 0.2s; }
@@ -105,14 +90,23 @@
     .produits-intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3rem; }
     .produits-intro p { font-size: 0.94rem; color: var(--muted); line-height: 1.85; margin-top: 1rem; }
     .commande-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--bordeaux); color: #fff; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.6rem 1.2rem; margin-top: 1rem; }
-    .produits-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); }
-    .produit-card { background: var(--warm-white); padding: 2.25rem 1.75rem; display: flex; flex-direction: column; transition: background 0.3s; }
+
+    /* Grille produits — 3 colonnes, 6 produits */
+    .produits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .produit-card { background: var(--warm-white); display: flex; flex-direction: column; transition: background 0.3s; overflow: hidden; }
     .produit-card:hover { background: var(--bordeaux-pale); }
-    .produit-icon { width: 50px; height: 50px; border: 1.5px solid var(--bordeaux); display: flex; align-items: center; justify-content: center; color: var(--bordeaux); margin-bottom: 1.4rem; transition: background 0.3s, color 0.3s; }
+
+    /* Image produit */
+    .produit-img-wrap { width: 100%; height: 200px; overflow: hidden; background: var(--border); }
+    .produit-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .produit-card:hover .produit-img-wrap img { transform: scale(1.05); }
+
+    .produit-body { padding: 1.75rem; display: flex; flex-direction: column; flex: 1; }
+    .produit-icon { width: 46px; height: 46px; border: 1.5px solid var(--bordeaux); display: flex; align-items: center; justify-content: center; color: var(--bordeaux); margin-bottom: 1.1rem; transition: background 0.3s, color 0.3s; }
     .produit-card:hover .produit-icon { background: var(--bordeaux); color: #fff; }
     .produit-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.55rem; }
     .produit-desc { font-size: 0.84rem; color: var(--muted); line-height: 1.75; flex: 1; }
-    .produit-tag { margin-top: 1.4rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bordeaux); display: flex; align-items: center; gap: 0.4rem; }
+    .produit-tag { margin-top: 1.2rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bordeaux); display: flex; align-items: center; gap: 0.4rem; }
     .produit-tag::before { content:''; display:block; width:14px; height:1px; background:var(--bordeaux); }
 
     /* SERVICES */
@@ -218,14 +212,14 @@
     <div class="hero-badge fade-up">Start-up artisanale · Reliure locale</div>
     <h1 class="fade-up" style="transition-delay:.1s">L'art de la<br><em>reliure artisanale,</em><br>au service de tous.</h1>
     <div class="hero-slogan fade-up" style="transition-delay:.18s">« La qualité locale au service du besoin »</div>
-    <p class="hero-desc fade-up" style="transition-delay:.22s">Registres, cahiers de textes, facturiers, blocs-notes — conçus à la main avec des techniques artisanales traditionnelles. Disponibles sur commande, partout.</p>
+    <p class="hero-desc fade-up" style="transition-delay:.22s">Registres, cahiers de textes, agendas, blocs-notes — conçus à la main avec des techniques artisanales traditionnelles. Disponibles sur commande, partout.</p>
     <div class="hero-btns fade-up" style="transition-delay:.3s">
       <a href="#produits" class="btn-primary">Voir nos produits <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></a>
       <a href="#contact" class="btn-outline">Passer commande</a>
     </div>
   </div>
   <div class="hero-right">
-    <img src="/mnt/user-data/uploads/IMG_7883.jpeg" alt="Registres reliés artisanaux L'Éveil Local" class="hero-photo" />
+    <img src="registres.jpg" alt="Registres reliés artisanaux L'Éveil Local" class="hero-photo" />
     <div class="hero-overlay"></div>
     <div class="hero-caption">
       <div class="hero-caption-big">RELIURE</div>
@@ -295,39 +289,99 @@
       </div>
     </div>
   </div>
+
   <div class="produits-grid">
+
+    <!-- Registres -->
     <div class="produit-card fade-up">
-      <div class="produit-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <div class="produit-img-wrap">
+        <img src="registres.jpg" alt="Registres artisanaux L'Éveil Local" />
       </div>
-      <div class="produit-name">Registres</div>
-      <p class="produit-desc">Registres administratifs, comptables ou personnalisés. Reliure solide, couverture rigide, pages cousues pour une durabilité maximale.</p>
-      <div class="produit-tag">Sur commande</div>
+      <div class="produit-body">
+        <div class="produit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="produit-name">Registres</div>
+        <p class="produit-desc">Registres administratifs et comptables. Reliure solide, couverture rigide, pages cousues. Format 23×36 disponible.</p>
+        <div class="produit-tag">Sur commande</div>
+      </div>
     </div>
+
+    <!-- Cahiers de textes -->
     <div class="produit-card fade-up" style="transition-delay:.08s">
-      <div class="produit-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+      <div class="produit-img-wrap">
+        <img src="cahier.png" alt="Cahiers de textes L'Éveil Local" />
       </div>
-      <div class="produit-name">Cahiers de textes</div>
-      <p class="produit-desc">Cahiers de textes scolaires ou professionnels, formats standards ou sur mesure. Couverture personnalisable selon votre besoin.</p>
-      <div class="produit-tag">Sur commande</div>
+      <div class="produit-body">
+        <div class="produit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        </div>
+        <div class="produit-name">Cahiers de textes</div>
+        <p class="produit-desc">Cahiers de textes scolaires conforme au programme, reliure robuste. Couverture personnalisable selon établissement.</p>
+        <div class="produit-tag">Sur commande</div>
+      </div>
     </div>
+
+    <!-- Blocs avec spirales -->
     <div class="produit-card fade-up" style="transition-delay:.16s">
-      <div class="produit-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="11" y2="17"/></svg>
+      <div class="produit-img-wrap">
+        <img src="blocs.png" alt="Blocs-notes avec spirales L'Éveil Local" />
       </div>
-      <div class="produit-name">Facturiers</div>
-      <p class="produit-desc">Carnets à souches, duplicata et triplicata pour commerçants, artisans et entreprises. Numérotation et en-tête personnalisables.</p>
-      <div class="produit-tag">Sur commande</div>
+      <div class="produit-body">
+        <div class="produit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <div class="produit-name">Blocs avec spirales</div>
+        <p class="produit-desc">Blocs-notes à spirales colorés pour bureau et usage professionnel. Couverture rigide, format au choix.</p>
+        <div class="produit-tag">Sur commande</div>
+      </div>
     </div>
+
+    <!-- Agendas -->
+    <div class="produit-card fade-up" style="transition-delay:.08s">
+      <div class="produit-img-wrap">
+        <img src="agendas.jpg" alt="Agendas L'Éveil Local" />
+      </div>
+      <div class="produit-body">
+        <div class="produit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="produit-name">Agendas</div>
+        <p class="produit-desc">Agendas personnalisés, hebdomadaires ou mensuels. Couverture personnalisable avec logo de votre structure.</p>
+        <div class="produit-tag">Sur commande</div>
+      </div>
+    </div>
+
+    <!-- Livres & Publications -->
+    <div class="produit-card fade-up" style="transition-delay:.16s">
+      <div class="produit-img-wrap">
+        <img src="livre.png" alt="Livres et publications L'Éveil Local" />
+      </div>
+      <div class="produit-body">
+        <div class="produit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="produit-name">Livres & Publications</div>
+        <p class="produit-desc">Reliure de livres, mémoires, thèses et publications. Finition professionnelle, couverture rigide ou souple.</p>
+        <div class="produit-tag">Sur commande</div>
+      </div>
+    </div>
+
+    <!-- Enveloppes & Classeurs -->
     <div class="produit-card fade-up" style="transition-delay:.24s">
-      <div class="produit-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      <div class="produit-img-wrap">
+        <img src="enveloppes.jpg" alt="Enveloppes et classeurs L'Éveil Local" />
       </div>
-      <div class="produit-name">Blocs-notes</div>
-      <p class="produit-desc">Blocs-notes de bureau, institutionnels ou publicitaires. Finition artisanale, collage et couverture de qualité, format au choix.</p>
-      <div class="produit-tag">Sur commande</div>
+      <div class="produit-body">
+        <div class="produit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8"/><path d="M22 7l-10 7L2 7"/><path d="M16 19h6"/><path d="M19 16l3 3-3 3"/></svg>
+        </div>
+        <div class="produit-name">Enveloppes & Classeurs</div>
+        <p class="produit-desc">Enveloppes artisanales et classeurs sur mesure. Idéal pour archivage et présentation de documents.</p>
+        <div class="produit-tag">Sur commande</div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -424,8 +478,10 @@
           <option value="">— Sélectionnez un produit ou service —</option>
           <option>Registres</option>
           <option>Cahiers de textes</option>
-          <option>Facturiers</option>
-          <option>Blocs-notes</option>
+          <option>Blocs avec spirales</option>
+          <option>Agendas</option>
+          <option>Livres & Publications</option>
+          <option>Enveloppes & Classeurs</option>
           <option>Façonnage</option>
           <option>Finitions</option>
           <option>Entretien / Restauration</option>
